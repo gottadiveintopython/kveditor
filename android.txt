@@ -1,0 +1,3 @@
+title=KvEditor
+author=Gotta Dive Into Python
+orientation=landscape

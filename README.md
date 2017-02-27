@@ -7,18 +7,17 @@ A simple Kv language editor
 
 ### 実行に必要なもの(requirements)
 
-- Python3
+- Python
 - Kivy
 - Pygments
 
-### 開發環境(Test Environment)
+### Test環境(Test Environment)
 
-Python3.4.3  
-Kivy1.9.1
+Python 3.4.3 + Kivy 1.9.1  
+Python 2.7.6 + Kivy 1.9.1  
+Kivy Launcher (Android App)
 
-### Keyboard Shortcuts
-
-以下のShortcutkeyが使えます。
+### Keyboard Shortcuts (doesn't work on android)
 
 - Ctrl + U = Update
 - Ctrl + S = Save

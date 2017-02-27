@@ -64,7 +64,7 @@ class KvEditor(Factory.FloatLayout):
         try:
             with io.open(filepath, r'rt', encoding=r'utf-8') as reader:
                 editor.text = tab2spaces(reader.read())
-        except OSError as e:
+        except (OSError, IOError) as e:
             show_message_popup("File: '{}'\n{}".format(filepath, e.strerror))
 
     def kve_save(self):
@@ -76,7 +76,7 @@ class KvEditor(Factory.FloatLayout):
         try:
             with io.open(filepath, r'wt', encoding=r'utf-8') as writer:
                 writer.write(text)
-        except OSError as e:
+        except (OSError, IOError) as e:
             show_message_popup("File: '{}'\n{}".format(filepath, e.strerror))
 
     def kve_update(self):
