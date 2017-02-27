@@ -1,4 +1,4 @@
-KivyのKvLanguageのコードを、結果をすぐに確認しながら書けるEditorです
+KivyのKvLanguageのコードを、結果をすぐに確認しながら書けるEditorです  
 A simple Kv language editor
 
 ![screenshot 0001](screenshot/0001.png)
@@ -13,7 +13,7 @@ A simple Kv language editor
 
 ### 開發環境(Test Environment)
 
-Python3.4.3
+Python3.4.3  
 Kivy1.9.1
 
 ### Keyboard Shortcuts
@@ -26,7 +26,7 @@ Kivy1.9.1
 
 ### Q&A
 
-Q. 既にKivy Designerという物があるのに何故わざわざこれを作ったの？
-Why you made this since there's already a Kivy Designer?
-A. 私の環境ではKivy Designerは重い上によく落ちたから
-Cuz It doesn't work well on my PC.
+Q. 既にKivy Designerという物があるのに何故わざわざこれを作ったの？  
+Why you made this since there's already a Kivy Designer?  
+A. 私の環境ではKivy Designerは重い上によく落ちたから  
+Cuz It doesn't work well on my PC.  
