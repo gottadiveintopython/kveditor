@@ -2,5 +2,6 @@ __pycache__/
 /.buildozer/
 /bin/
 *.pyc
+*.pyo
 test.kv
 buildozer.spec

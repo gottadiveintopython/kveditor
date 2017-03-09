@@ -1,0 +1,5 @@
+# -*- coding: utf-8 -*-
+
+　現在KvEditorクラスのインスタンスは複数作れるようには設計されていない。そうする為には
+Builder.load_string()及びBuilder.unload_file()に渡しているKV_FILENAMEをイン
+スタンス毎に異なる文字列にしてやる必要がある。
