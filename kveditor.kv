@@ -33,8 +33,12 @@
                 min_size: self.parent.width * 0.05
                 max_size: self.parent.width * 0.95
                 sizable_from: r'right'
-                FloatLayout:
-                    id: preview
+                StencilView:
+                    StencilTouch:
+                        size: self.parent.size
+                        RelativeLayout:
+                            id: preview
+                            size: self.parent.size
             CodeInput:
                 id: editor
                 lexer: KivyLexer()

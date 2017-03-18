@@ -114,5 +114,25 @@ class KvEditor(Factory.FloatLayout):
             preview.add_widget(instance)
 
 
+class StencilTouch(Factory.Widget):
+    pass
+
+
+def _override_on_touch_xxx_methods(cls):
+    for name in r'up move down'.split():
+        method_name = r'on_touch_' + name
+
+        def on_touch_xxx(self, touch, _method_name=method_name):
+            if self.collide_point(*touch.pos):
+                return getattr(super(cls, self), _method_name)(touch)
+            else:
+                return False
+
+        setattr(cls, method_name, on_touch_xxx)
+
+
+_override_on_touch_xxx_methods(StencilTouch)
+
+
 if __name__ == r'__main__':
     KvEditorApp().run()
