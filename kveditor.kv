@@ -36,9 +36,11 @@
                 StencilView:
                     StencilTouch:
                         size: self.parent.size
+                        pos: self.parent.pos
                         RelativeLayout:
                             id: preview
                             size: self.parent.size
+                            pos: self.parent.pos
             CodeInput:
                 id: editor
                 lexer: KivyLexer()
