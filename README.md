@@ -5,12 +5,6 @@ A simple Kv language editor
 
 ![screenshot 0002](screenshot/0002.png)
 
-### 実行に必要なもの(requirements)
-
-- Python
-- Kivy
-- Pygments
-
 ### Test環境(Test Environment)
 
 - Python 3.4.3 + Kivy 1.9.1  

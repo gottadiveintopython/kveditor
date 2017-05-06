@@ -1,0 +1,49 @@
+#:kivy 1.9.1
+#:import KivyLexer kivy.extras.highlight.KivyLexer
+
+<KvEditor>:
+    BoxLayout:
+        orientation: r'vertical'
+        BoxLayout:
+            orientation: r'horizontal'
+            size_hint_y: None
+            height: 30
+            Button:
+                text: r'File'
+                size_hint_x: 1
+                on_press: root.kve_choosefile()
+            TextInput:
+                id: ti_filepath
+                multiline: False
+                size_hint_x: 13
+            Button:
+                text: r'Load'
+                size_hint_x: 2
+                on_press: root.kve_load()
+            Button:
+                text: r'Save'
+                size_hint_x: 2
+                on_press: root.kve_save()
+            Button:
+                text: r'Update'
+                size_hint_x: 2
+                on_press: root.kve_update()
+        BoxLayout:
+            Splitter:
+                min_size: self.parent.width * 0.05
+                max_size: self.parent.width * 0.95
+                sizable_from: r'right'
+                StencilView:
+                    StencilTouch:
+                        size: self.parent.size
+                        pos: self.parent.pos
+                        RelativeLayout:
+                            id: preview
+                            size: self.parent.size
+                            pos: self.parent.pos
+            CodeInput:
+                id: editor
+                lexer: KivyLexer()
+
+KvEditor:
+
