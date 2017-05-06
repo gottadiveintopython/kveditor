@@ -25,22 +25,16 @@
                 size_hint_x: 2
                 on_press: root.kve_save()
             Button:
-                text: r'Update'
+                text: r'Preview'
                 size_hint_x: 2
-                on_press: root.kve_update()
+                on_press: root.kve_preview()
         BoxLayout:
             Splitter:
                 min_size: self.parent.width * 0.05
                 max_size: self.parent.width * 0.95
                 sizable_from: r'right'
-                StencilView:
-                    StencilTouch:
-                        size: self.parent.size
-                        pos: self.parent.pos
-                        RelativeLayout:
-                            id: preview
-                            size: self.parent.size
-                            pos: self.parent.pos
+                Preview:
+                    id: preview
             CodeInput:
                 id: editor
                 lexer: KivyLexer()
