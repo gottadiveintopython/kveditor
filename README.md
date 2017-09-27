@@ -13,6 +13,8 @@ The tool called kviewer has been added to Kivy. KvEditor is useless now :-(
 
 ### Requirements
 
+- kivy>=1.9.1  
+- pygments  
 - kivy.garden.xpopup
 
 ### Keyboard Shortcuts
