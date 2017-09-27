@@ -2,17 +2,20 @@ KivyのKvLanguageのコードを、結果をすぐに確認しながら書ける
 A simple Kv language editor  
 
 Kivy 1.10.0 から追加された[kviewer](https://github.com/kivy/kivy/blob/master/kivy/tools/kviewer.py)によって、このKvEditorは無用の長物と化しました。  
-The tool called [kviewer](https://github.com/kivy/kivy/blob/master/kivy/tools/kviewer.py) has been added to Kivy. KvEditor is useless now :-( 
+The tool called kviewer has been added to Kivy. KvEditor is useless now :-( 
 
 ![screenshot 0001](screenshot.png)
 
 ### Test環境(Test Environment)
 
-- Python 3.4.3 + Kivy 1.9.1  
-- Python 2.7.6 + Kivy 1.9.1  
-- Kivy Launcher (Android App)
+- Python 3.6.0 + Kivy 1.10.0  
+- Python 2.7.13 + Kivy 1.10.0  
 
-### Keyboard Shortcuts (doesn't work on android)
+### Requirements
+
+- kivy.garden.xpopup
+
+### Keyboard Shortcuts
 
 - Ctrl + P = Preview
 - Ctrl + S = Save

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import io
+import os.path
 
 import kivy
 kivy.require(r'1.9.1')
@@ -9,8 +10,8 @@ from kivy.lang import Builder
 from kivy.factory import Factory
 from kivy.core.window import Window
 
-from messagepopup import show_message_popup
-from filechooserdialog import FileChooserDialog
+from kivy.garden.xpopup.notification import XMessage
+from kivy.garden.xpopup.file import XFileOpen
 
 
 def tab2spaces(text):
@@ -52,10 +53,14 @@ class KvEditor(Factory.FloatLayout):
         Window.bind(on_keyboard=self.on_keyboard)
 
     def kve_choosefile(self):
-        r'''Fileを選ぶDialogを出す'''
-        dialog = FileChooserDialog()
-        dialog.bind(filepath=self.ids.ti_filepath.setter(r'text'))
-        dialog.open()
+        def on_dismiss(popup):
+            if popup.is_canceled():
+                return
+            filepath = popup.selection[0]
+            self.ids.ti_filepath.text = filepath
+            self.last_opened_dir = os.path.dirname(filepath)
+        last_opened_dir = getattr(self, r'last_opened_dir', os.path.curdir)
+        XFileOpen(on_dismiss=on_dismiss, multiselect=False, path=last_opened_dir)
 
     def kve_load(self):
         r'''Fileの中身をEditorに読み込む'''
@@ -65,7 +70,10 @@ class KvEditor(Factory.FloatLayout):
             with io.open(filepath, r'rt', encoding=r'utf-8') as reader:
                 editor.text = tab2spaces(reader.read())
         except (OSError, IOError) as e:
-            show_message_popup("File: '{}'\n{}".format(filepath, e.strerror))
+            XMessage(
+                title=r'Error',
+                text='Failed to load from the file : {}\n{}'.format(
+                    filepath, e.strerror))
 
     def kve_save(self):
         r'''EditorのtextをFileに書き込む'''
@@ -76,7 +84,10 @@ class KvEditor(Factory.FloatLayout):
             with io.open(filepath, r'wt', encoding=r'utf-8') as writer:
                 writer.write(editor.text)
         except (OSError, IOError) as e:
-            show_message_popup("File: '{}'\n{}".format(filepath, e.strerror))
+            XMessage(
+                title=r'Error',
+                text='Failed to write to the file : {}\n{}'.format(
+                    filepath, e.strerror))
 
     def kve_preview(self):
         r'''EditorのtextからWidgetを作って左側にPreview
