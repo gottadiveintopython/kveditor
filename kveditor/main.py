@@ -105,9 +105,9 @@ class KvEditor(Factory.FloatLayout):
         preview.clear_widgets()  # 以前のPreviewを破棄
         Builder.unload_file(self.KV_FILENAME)  # 以前のKvコードを無効化
 
-        instance = None
+        widget = None
         try:
-            instance = Builder.load_string(
+            widget = Builder.load_string(
                 editor.text,
                 filename=self.KV_FILENAME
             )
@@ -116,19 +116,17 @@ class KvEditor(Factory.FloatLayout):
             temp.extend([str(arg) for arg in e.args])
             error_msg = '\n'.join(temp)
         else:
-            if instance is None:
+            if widget is None:
                 error_msg = r'No root rules.'
-        if instance is None:
+        if widget is None:
             # Widgetの作成に失敗した時は、代わりにエラーメッセージの書かれたLabel
             # を貼り付ける
-            preview.add_widget(Factory.Label(
-                size_hint=(1, 1,),
-                text=error_msg))
+            preview.add_widget(Factory.Label(text=error_msg))
         else:
-            preview.add_widget(instance)
+            preview.add_widget(widget)
 
 
-class Preview(Factory.StencilView, Factory.RelativeLayout):
+class Preview(Factory.RelativeLayout, Factory.StencilView):
 
     def on_touch_down(self, touch):
         if self.collide_point(*touch.pos):
