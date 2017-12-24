@@ -29,7 +29,9 @@ class KvEditorApp(App):
 
 class KvEditor(Factory.FloatLayout):
 
-    KV_FILENAME = r'kveditor_internal'
+    def __init__(self, **kwargs):
+        super(KvEditor, self).__init__(**kwargs)
+        self._kv_filename = r'KvEditor_internal.' + str(self.uid)
 
     def on_keyboard(self, instance, key, scancode, codepoint, modifiers):
         r'''Keyboard入力があった時に呼ばれるMethod
@@ -103,13 +105,13 @@ class KvEditor(Factory.FloatLayout):
         preview = self.ids.preview  # Preview貼り付け先のWidget
         editor.text = tab2spaces(editor.text)
         preview.clear_widgets()  # 以前のPreviewを破棄
-        Builder.unload_file(self.KV_FILENAME)  # 以前のKvコードを無効化
+        Builder.unload_file(self._kv_filename)  # 以前のKvコードを無効化
 
         widget = None
         try:
             widget = Builder.load_string(
                 editor.text,
-                filename=self.KV_FILENAME
+                filename=self._kv_filename
             )
         except Exception as e:
             temp = [str(e.__class__)]
