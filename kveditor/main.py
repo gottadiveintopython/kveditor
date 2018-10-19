@@ -4,7 +4,7 @@ import io
 import os.path
 
 import kivy
-kivy.require(r'1.9.1')
+kivy.require('1.9.1')
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.factory import Factory
@@ -15,7 +15,7 @@ from kivy.garden.xpopup.file import XFileOpen
 
 
 def tab2spaces(text):
-    return text.replace('\t', r'    ')
+    return text.replace('\t', '    ')
 
 
 class KvEditorApp(App):
@@ -31,26 +31,26 @@ class KvEditor(Factory.FloatLayout):
 
     def __init__(self, **kwargs):
         super(KvEditor, self).__init__(**kwargs)
-        self._kv_filename = r'KvEditor_internal.' + str(self.uid)
+        self._kv_filename = 'KvEditor_internal.' + str(self.uid)
 
     def on_keyboard(self, instance, key, scancode, codepoint, modifiers):
-        r'''Keyboard入力があった時に呼ばれるMethod
+        '''Keyboard入力があった時に呼ばれるMethod
 
         以下のShortcutKeyを実現している
             Ctrl + P => Preview
             Ctrl + S => Save
             Ctrl + L => Load
         '''
-        if len(modifiers) == 1 and modifiers[0] == r'ctrl':
-            if codepoint == r'p':
+        if len(modifiers) == 1 and modifiers[0] == 'ctrl':
+            if codepoint == 'p':
                 self.kve_preview()
-            elif codepoint == r's':
+            elif codepoint == 's':
                 self.kve_save()
-            elif codepoint == r'l':
+            elif codepoint == 'l':
                 self.kve_load()
 
     def kve_start(self):
-        r'''アプリケーション開始時に行いたい処理を書いておくMethod'''
+        '''アプリケーション開始時に行いたい処理を書いておくMethod'''
 
         Window.bind(on_keyboard=self.on_keyboard)
 
@@ -61,38 +61,38 @@ class KvEditor(Factory.FloatLayout):
             filepath = popup.selection[0]
             self.ids.ti_filepath.text = filepath
             self.last_opened_dir = os.path.dirname(filepath)
-        last_opened_dir = getattr(self, r'last_opened_dir', os.path.curdir)
+        last_opened_dir = getattr(self, 'last_opened_dir', os.path.curdir)
         XFileOpen(on_dismiss=on_dismiss, multiselect=False, path=last_opened_dir)
 
     def kve_load(self):
-        r'''Fileの中身をEditorに読み込む'''
+        '''Fileの中身をEditorに読み込む'''
         editor = self.ids.editor
         filepath = self.ids.ti_filepath.text
         try:
-            with io.open(filepath, r'rt', encoding=r'utf-8') as reader:
+            with io.open(filepath, 'rt', encoding='utf-8') as reader:
                 editor.text = tab2spaces(reader.read())
         except (OSError, IOError) as e:
             XMessage(
-                title=r'Error',
+                title='Error',
                 text='Failed to load from the file : {}\n{}'.format(
                     filepath, e.strerror))
 
     def kve_save(self):
-        r'''EditorのtextをFileに書き込む'''
+        '''EditorのtextをFileに書き込む'''
         editor = self.ids.editor
         editor.text = tab2spaces(editor.text)
         filepath = self.ids.ti_filepath.text
         try:
-            with io.open(filepath, r'wt', encoding=r'utf-8') as writer:
+            with io.open(filepath, 'wt', encoding='utf-8') as writer:
                 writer.write(editor.text)
         except (OSError, IOError) as e:
             XMessage(
-                title=r'Error',
+                title='Error',
                 text='Failed to write to the file : {}\n{}'.format(
                     filepath, e.strerror))
 
     def kve_preview(self):
-        r'''EditorのtextからWidgetを作って左側にPreview
+        '''EditorのtextからWidgetを作って左側にPreview
 
         Builder.load_stringは
         1. 与えられたKvコードに問題があると例外を投げる
@@ -119,7 +119,7 @@ class KvEditor(Factory.FloatLayout):
             error_msg = '\n'.join(temp)
         else:
             if widget is None:
-                error_msg = r'No root rules.'
+                error_msg = 'No root rules.'
         if widget is None:
             # Widgetの作成に失敗した時は、代わりにエラーメッセージの書かれたLabel
             # を貼り付ける

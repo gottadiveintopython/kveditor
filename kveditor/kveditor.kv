@@ -3,13 +3,13 @@
 
 <KvEditor>:
     BoxLayout:
-        orientation: r'vertical'
+        orientation: 'vertical'
         BoxLayout:
-            orientation: r'horizontal'
+            orientation: 'horizontal'
             size_hint_y: None
             height: 30
             Button:
-                text: r'File'
+                text: 'File'
                 size_hint_x: 1
                 on_press: root.kve_choosefile()
             TextInput:
@@ -17,22 +17,22 @@
                 multiline: False
                 size_hint_x: 13
             Button:
-                text: r'Load'
+                text: 'Load'
                 size_hint_x: 2
                 on_press: root.kve_load()
             Button:
-                text: r'Save'
+                text: 'Save'
                 size_hint_x: 2
                 on_press: root.kve_save()
             Button:
-                text: r'Preview'
+                text: 'Preview'
                 size_hint_x: 2
                 on_press: root.kve_preview()
         BoxLayout:
             Splitter:
                 min_size: self.parent.width * 0.05
                 max_size: self.parent.width * 0.95
-                sizable_from: r'right'
+                sizable_from: 'right'
                 Preview:
                     id: preview
             CodeInput:
