@@ -35,6 +35,24 @@
                 sizable_from: 'right'
                 Preview:
                     id: preview
+                    canvas.before:
+                        Clear:
+                        PushMatrix:
+                        Translate:
+                            xy: self.pos
+                        StencilPush:
+                        Rectangle:
+                            pos: 0, 0
+                            size: self.size
+                        StencilUse:
+                    canvas.after:
+                        Clear:
+                        StencilUnUse:
+                        Rectangle:
+                            pos: 0, 0
+                            size: self.size
+                        StencilPop:
+                        PopMatrix:
             CodeInput:
                 id: editor
                 lexer: KivyLexer()

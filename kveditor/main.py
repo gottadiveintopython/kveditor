@@ -128,7 +128,7 @@ class KvEditor(Factory.FloatLayout):
             preview.add_widget(widget)
 
 
-class Preview(Factory.RelativeLayout, Factory.StencilView):
+class Preview(Factory.RelativeLayout):
 
     def on_touch_down(self, touch):
         if self.collide_point(*touch.pos):
