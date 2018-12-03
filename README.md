@@ -2,7 +2,7 @@ KivyのKvLanguageのコードを、結果をすぐに確認しながら書ける
 A simple Kv language editor  
 
 Kivy 1.10.0 から追加された[kviewer](https://github.com/kivy/kivy/blob/master/kivy/tools/kviewer.py)によって、このKvEditorは無用の長物と化しました。  
-The tool called kviewer has been added to Kivy. KvEditor is useless now :-(
+A tool called [kviewer](https://github.com/kivy/kivy/blob/master/kivy/tools/kviewer.py) has been added since version 1.10.0. It's much better than KvEditor.
 
 ![screenshot 0001](screenshot.png)
 
