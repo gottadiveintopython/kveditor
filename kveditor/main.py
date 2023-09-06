@@ -3,6 +3,7 @@
 import sys
 import io
 import os.path
+from functools import cached_property
 
 import kivy
 kivy.require('1.9.1')
@@ -16,7 +17,7 @@ def check_if_xpopup_is_installed() -> bool:
     try:
         import kivy.garden.xpopup
     except (ImportError, KeyError):
-        print("You don't have 'kivy.garden.xpopup' installed.", file=sys.stderr)
+        print("You don't have 'kivy.garden.xpopup' installed. You cannot perform I/O operations.", file=sys.stderr)
         return False
     return True
 
@@ -26,19 +27,15 @@ def tab2spaces(text):
 
 
 class KvEditorApp(App):
-
-    def on_pause(self):
-        return True
-
     def on_start(self):
         self.root.kve_start()
 
 
 class KvEditor(Factory.FloatLayout):
 
-    def __init__(self, **kwargs):
-        super(KvEditor, self).__init__(**kwargs)
-        self._kv_filename = 'KvEditor_internal.' + str(self.uid)
+    @cached_property
+    def _kv_filename(self):
+        return 'KvEditor_internal.' + str(self.uid)
 
     def on_keyboard(self, instance, key, scancode, codepoint, modifiers):
         '''Keyboard入力があった時に呼ばれるMethod
@@ -87,10 +84,7 @@ class KvEditor(Factory.FloatLayout):
             with io.open(filepath, 'rt', encoding='utf-8') as reader:
                 editor.text = tab2spaces(reader.read())
         except (OSError, IOError) as e:
-            XMessage(
-                title='Error',
-                text='Failed to load from the file : {}\n{}'.format(
-                    filepath, e.strerror))
+            XMessage(title='Error', text='Failed to load from the file : {}\n{}'.format(filepath, e.strerror))
 
     def kve_save(self):
         '''EditorのtextをFileに書き込む'''
@@ -105,10 +99,7 @@ class KvEditor(Factory.FloatLayout):
             with io.open(filepath, 'wt', encoding='utf-8') as writer:
                 writer.write(editor.text)
         except (OSError, IOError) as e:
-            XMessage(
-                title='Error',
-                text='Failed to write to the file : {}\n{}'.format(
-                    filepath, e.strerror))
+            XMessage(title='Error', text='Failed to write to the file : {}\n{}'.format(filepath, e.strerror))
 
     def kve_preview(self):
         '''EditorのtextからWidgetを作って左側にPreview
@@ -138,7 +129,7 @@ class KvEditor(Factory.FloatLayout):
             error_msg = '\n'.join(temp)
         else:
             if widget is None:
-                error_msg = 'No root rules.'
+                error_msg = 'No root rule.'
         if widget is None:
             # Widgetの作成に失敗した時は、代わりにエラーメッセージの書かれたLabel
             # を貼り付ける
@@ -151,15 +142,15 @@ class Preview(Factory.RelativeLayout):
 
     def on_touch_down(self, touch):
         if self.collide_point(*touch.pos):
-            return super(Preview, self).on_touch_down(touch)
+            return super().on_touch_down(touch)
 
     def on_touch_move(self, touch):
         if self.collide_point(*touch.pos):
-            return super(Preview, self).on_touch_move(touch)
+            return super().on_touch_move(touch)
 
     def on_touch_up(self, touch):
         if self.collide_point(*touch.pos):
-            return super(Preview, self).on_touch_up(touch)
+            return super().on_touch_up(touch)
 
 
 if __name__ == r'__main__':

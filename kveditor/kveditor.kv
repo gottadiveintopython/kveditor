@@ -33,26 +33,12 @@
                 min_size: self.parent.width * 0.05
                 max_size: self.parent.width * 0.95
                 sizable_from: 'right'
-                Preview:
-                    id: preview
-                    canvas.before:
-                        Clear:
-                        PushMatrix:
-                        Translate:
-                            xy: self.pos
-                        StencilPush:
-                        Rectangle:
-                            pos: 0, 0
-                            size: self.size
-                        StencilUse:
-                    canvas.after:
-                        Clear:
-                        StencilUnUse:
-                        Rectangle:
-                            pos: 0, 0
-                            size: self.size
-                        StencilPop:
-                        PopMatrix:
+                StencilView:
+                    id: stencil_view
+                    Preview:
+                        size: stencil_view.size
+                        pos: stencil_view.pos
+                        id: preview
             CodeInput:
                 id: editor
                 lexer: KivyLexer()
