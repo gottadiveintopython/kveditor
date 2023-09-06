@@ -1,21 +1,20 @@
-KivyのKvLanguageのコードを、結果をすぐに確認しながら書けるEditorです  
 A simple Kv language editor  
 
-Kivy 1.10.0 から追加された[kviewer](https://github.com/kivy/kivy/blob/master/kivy/tools/kviewer.py)によって、このKvEditorは無用の長物と化しました。  
-A tool called [kviewer](https://github.com/kivy/kivy/blob/master/kivy/tools/kviewer.py) has been added since version 1.10.0. It's much better than KvEditor.
+A tool called [kviewer](https://github.com/kivy/kivy/blob/master/kivy/tools/kviewer.py) exists since version 1.10.0. It's much better than this.
 
 ![screenshot 0001](screenshot.png)
 
-### Test環境(Test Environment)
+### Test Environment
 
-- Python 3.6.3 + Kivy 1.10.1  
-- Python 2.7.2 + Kivy 1.10.0  
+- Python 3.11.4 + Kivy 2.2.1  
 
 ### Requirements
 
-- kivy>=1.9.1  
-- pygments  
-- kivy.garden.xpopup
+- kivy>=2.2.1
+
+### Optional Dependencies
+
+- kivy.garden.xpopup (for file I/O dialog)
 
 ### Keyboard Shortcuts
 
@@ -23,11 +22,7 @@ A tool called [kviewer](https://github.com/kivy/kivy/blob/master/kivy/tools/kvie
 - Ctrl + S = Save
 - Ctrl + L = Load
 
-### その他
+### misc
 
-Q. 既にKivy Designerという物があるのに何故わざわざこれを作ったの？  
-Why you made this since there's already a Kivy Designer?  
-A. 私の環境ではKivy Designerは重い上によく落ちたから  
-Cuz It doesn't work well on my PC.  
-
-Qiitaにてソースコードの解説もしています(記事:[簡易なKvEditorを作る](http://qiita.com/gotta_dive_into_python/items/d903f10d4afe86868def))  
+Q. Why did I create this even though there's already a tool called 'Kivy Designer'?  
+A. Cuz it doesn't work well on my PC.  
