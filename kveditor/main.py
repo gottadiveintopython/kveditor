@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import sys
 import io
 import os.path
 
@@ -10,8 +11,14 @@ from kivy.lang import Builder
 from kivy.factory import Factory
 from kivy.core.window import Window
 
-from kivy.garden.xpopup.notification import XMessage
-from kivy.garden.xpopup.file import XFileOpen
+
+def check_if_xpopup_is_installed() -> bool:
+    try:
+        import kivy.garden.xpopup
+    except (ImportError, KeyError):
+        print("You don't have 'kivy.garden.xpopup' installed.", file=sys.stderr)
+        return False
+    return True
 
 
 def tab2spaces(text):
@@ -55,6 +62,10 @@ class KvEditor(Factory.FloatLayout):
         Window.bind(on_keyboard=self.on_keyboard)
 
     def kve_choosefile(self):
+        if not check_if_xpopup_is_installed():
+            return
+        from kivy.garden.xpopup.file import XFileOpen
+            
         def on_dismiss(popup):
             if popup.is_canceled():
                 return
@@ -66,6 +77,10 @@ class KvEditor(Factory.FloatLayout):
 
     def kve_load(self):
         '''Fileの中身をEditorに読み込む'''
+        if not check_if_xpopup_is_installed():
+            return
+        from kivy.garden.xpopup.notification import XMessage
+
         editor = self.ids.editor
         filepath = self.ids.ti_filepath.text
         try:
@@ -79,6 +94,10 @@ class KvEditor(Factory.FloatLayout):
 
     def kve_save(self):
         '''EditorのtextをFileに書き込む'''
+        if not check_if_xpopup_is_installed():
+            return
+        from kivy.garden.xpopup.notification import XMessage
+
         editor = self.ids.editor
         editor.text = tab2spaces(editor.text)
         filepath = self.ids.ti_filepath.text
